@@ -42,22 +42,25 @@ internal class PopUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setAdapter()
-        binding.tbToolbar.title = if (!mPickerData?.mPopUpConfig?.chooserTitle.isNullOrEmpty()) {
-            mPickerData?.mPopUpConfig?.chooserTitle
-        } else {
-            getString(R.string.str_choose_option)
-        }
-        if (mPickerData?.mPopUpConfig?.mPopUpType?.isDialog() == true) {
-            binding.root.radius = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                Const.CARD_RADIUS,
-                resources.displayMetrics,
-            )
-            setContentView(binding.root)
-        } else {
-            showBottomSheetDialog()
-        }
+        intentResultLauncher.launch(
+                            FilePicker.Builder(this).pickDocumentFileBuild(item),
+                        )
+        // setAdapter()
+        // binding.tbToolbar.title = if (!mPickerData?.mPopUpConfig?.chooserTitle.isNullOrEmpty()) {
+        //     mPickerData?.mPopUpConfig?.chooserTitle
+        // } else {
+        //     getString(R.string.str_choose_option)
+        // }
+        // if (mPickerData?.mPopUpConfig?.mPopUpType?.isDialog() == true) {
+        //     binding.root.radius = TypedValue.applyDimension(
+        //         TypedValue.COMPLEX_UNIT_DIP,
+        //         Const.CARD_RADIUS,
+        //         resources.displayMetrics,
+        //     )
+        //     setContentView(binding.root)
+        // } else {
+        //     showBottomSheetDialog()
+        // }
     }
 
     private fun setAdapter() {
